@@ -91,11 +91,9 @@ public class suanfa {
         return maxHeight;
     }
     public boolean isValid(String s) {
-        Map<Character,Character> map = new HashMap<>();
-        map.put('{','}');
-        map.put('[',']');
-        map.put('(',')');
-
+        if(s.length() == 0){
+            return true;
+        }
         Stack<Character> stack = new Stack<>();
         stack.push(s.charAt(0));
         for(int i = 1;i < s.length();i++){
