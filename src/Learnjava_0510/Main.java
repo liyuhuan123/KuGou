@@ -1,7 +1,16 @@
 package Learnjava_0510;
 
 import java.util.Scanner;
+class TreeNode{
+    TreeNode left;
+    TreeNode right;
+    TreeNode root;
+    int val;
 
+    public TreeNode(int val) {
+        this.val = val;
+    }
+}
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -34,5 +43,24 @@ public class Main {
             m++;
         }
         return count;
+    }
+    boolean isSymmetrical(TreeNode pRoot)
+    {
+        if(pRoot == null){
+            return true;
+        }
+        return helper(pRoot.left,pRoot.right);
+
+    }
+
+    private boolean helper(TreeNode left, TreeNode right) {
+        if(left == null && right == null){
+            return true;
+        }
+        if(left != null || right != null || left.val != right.val){
+            return false;
+        }
+        return helper(left.left,right.right) &&
+                helper(left.right,right.left);
     }
 }
