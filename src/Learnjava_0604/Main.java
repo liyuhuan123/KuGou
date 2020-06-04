@@ -6,23 +6,24 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()){
-            int n = sc.nextInt();
-            System.out.println(need(n));
+            String str1 = sc.nextLine();
+            String str2 = sc.nextLine();
+            System.out.println(delete(str1,str2));
         }
     }
 
-    private static int need(int n) {
-        if(n < 6 || n % 2 != 0 || n == 10){
-            return -1;
+    private static String delete(String str1, String str2) {
+        for(int i = 0;i < str1.length();i++){
+            for(int j = 0;j < str2.length();j++){
+                if(str1.charAt(i) == str2.charAt(j)){
+                    str1 = deleteHelper(str1,i);
+                }
+            }
         }
-        int chu = n / 8;
-        int yu = n % 8;
-        int temp = 0;
-        if(yu == 0){
-            return chu;
-        }else {
-            temp++;
-            return chu + 1;
-        }
+        return str1;
+    }
+
+    private static String deleteHelper(String str1, int i) {
+        return str1.substring(0,i) + str1.substring(i + 1);
     }
 }
