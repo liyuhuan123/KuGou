@@ -1,33 +1,32 @@
 package Learnjava_0609;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //删数
+        //n个数里最小的K个数
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()){
-            int n = sc.nextInt();
-            if(n > 1000){
-                n = 1000;
+            String line = sc.nextLine();
+            String[] arr = line.split(" ");
+            List<Integer> list = new ArrayList<>();
+            int k = Integer.parseInt(arr[arr.length - 1]);
+            for(int i = 0;i < arr.length - 1;i++){
+                list.add(Integer.valueOf(arr[i]));
             }
-            Queue<Integer> queue = new LinkedList<>();
-            for(int i = 0;i < n;i++){
-                queue.add(i);
+            Collections.sort(list);
+            int i = 0;
+            if(k > list.size()){
+                System.out.println(list);
             }
-            while(queue.size() != 1){
-                int count = 2;
-                while(count-- != 0){
-                    int temp = queue.peek();
-                    queue.poll();
-                    queue.add(temp);
-                }
-                queue.poll();
-
+            while(i < k){
+                System.out.print(list.get(i) + " ");
+                i++;
             }
-            System.out.println(queue.peek());
+            System.out.println();
         }
     }
 }
