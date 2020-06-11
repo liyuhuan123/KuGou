@@ -1,22 +1,29 @@
 package Learnjava_0611;
 
+import java.util.Arrays;
+
 public class Test {
-    //构建乘积数组
-    public int[] multiply(int[] A) {
-        if(A == null || A.length <= 1){
-            return A;
+    //每日温度
+    public static int[] dailyTemperatures(int[] T) {
+        int[] result = new int[T.length];
+        for(int i  = 0;i < T.length;i++){
+            int j = i + 1;
+            while(j < T.length){
+                if(T[i] < T[j]){
+                    result[i] = j - i;
+                    break;
+                }
+                j++;
+                if(j == T.length - 1){
+                    result[i] = 0;
+                }
+            }
         }
-        int len = A.length;
-        int[] res = new int[len];
-        res[0] = 1;
-        for(int i = 1;i < len;i++){
-            res[i] = res[i - 1] * A[i - 1];
-        }
-        int temp  = A[len - 1];
-        for(int j = len - 2;j >= 0;j--){
-            res[j] = res[j] * temp;
-            temp *= A[j];
-        }
-        return res;
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] T = {73,74,75,71,69,72,76,73};
+        System.out.println(Arrays.toString(dailyTemperatures(T)));
     }
 }
