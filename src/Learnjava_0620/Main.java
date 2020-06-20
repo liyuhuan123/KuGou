@@ -1,34 +1,30 @@
 package Learnjava_0620;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
+//DNA序列
 public class Main {
-    //数组中值出现了一次的数
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            int N = sc.nextInt();
-            int[] arr = new int[N];
-            if (N < 2) {
-                return;
-            }
-            for (int i = 0; i < N; i++) {
-                arr[i] = sc.nextInt();
-            }
-            Arrays.sort(arr);
-            Set<Integer> set = new HashSet<>();
-            for (int i : arr) {
-                if (!set.add(i)) {
-                    set.remove(i);
-                } else {
-                    set.add(i);
+        while(sc.hasNext()){
+            String str = sc.nextLine();
+            int n = sc.nextInt();
+            int max = 0;
+            int index = 0;
+            for(int i = 0;i <= str.length() - n;i++){
+                int count  = 0;
+                for(int j = i;j < i + n;j++){
+                    if(str.charAt(j) == 'C' || str.charAt(j) == 'G'){
+                        count++;
+                    }
+                    if(count > max){
+                        max = count;
+                        index = i;
+                    }
                 }
             }
-            System.out.println(set.toArray(new Integer[set.size()])[0] + " " + set.toArray(new Integer[set.size()])[1]);
-            System.out.println();
+            System.out.println(str.substring(index,index + n));
         }
     }
 }
