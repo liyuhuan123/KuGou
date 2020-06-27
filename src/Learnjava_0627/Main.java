@@ -4,53 +4,33 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //小易的升级之路
+        //最高分是多少
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()) {
-            int boss = sc.nextInt();
-            int child = sc.nextInt();
-            int[] bosses = new int[boss];
-            for(int i = 0;i < boss;i++){
-                bosses[i] = sc.nextInt();
+            int N = sc.nextInt();//学生的数目
+            int M = sc.nextInt();//操作的数目
+            int[] array = new int[N];
+            array[0] = 0;
+            for(int i = 0;i < N;i++){
+                array[i] = sc.nextInt();
             }
-            int boss1 = sc.nextInt();
-            int child1 = sc.nextInt();
-            int[] bosses1 = new int[boss1];
-            for(int i = 0;i < boss1;i++){
-                bosses1[i] = sc.nextInt();
-            }
-            System.out.println(helper(bosses,child,boss));
-            System.out.println(helper(bosses1,child1,boss1));
-        }
-        }
-
-    private static int helper(int[] bosses, int child, int boss) {
-        int result = child;
-        for(int i = 0;i < boss;i++){
-            if(result >= bosses[i]){
-                result += bosses[i];
-
-            }else{
-                result += GCD(result,bosses[i]);
+            for(int i = 0;i < M;i++){
+                String[] line = sc.nextLine().split(" ");
+                int a = Integer.parseInt(line[1]) - 1;
+                int b = Integer.parseInt(line[2]) - 1;
+                switch(line[0]){
+                    case "Q":
+                        int max = 0;
+                        for(int j = Math.min(a,b);j <= Math.max(a,b);j++){
+                            max = Math.max(max,array[j]);
+                        }
+                        System.out.println(max);
+                        break;
+                    case "U":
+                        array[a] = b + 1;
+                        break;
+                }
             }
         }
-        return result;
-    }
-
-    private static int GCD(int result, int boss) {
-        if(result < boss){
-            int temp = result;
-            result = boss;
-            boss = temp;
-        }
-        int cs = result;
-        int bcs = boss;
-        int ys = cs % bcs;
-        while(ys != 0){
-            cs = bcs;
-            bcs = ys;
-            ys = cs % bcs;
-        }
-        return bcs;
     }
 }
