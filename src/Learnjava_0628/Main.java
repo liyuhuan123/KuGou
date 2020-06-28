@@ -1,59 +1,88 @@
 package Learnjava_0628;
-
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args){
-        //学分绩点
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()){
-            int n = sc.nextInt();//总的课程数
-            int[] score = new int[n];//相应课程的学分
-            int[] arr = new int[n];//课程实际得分
-            for(int i = 0;i < n;i++){
-                score[i] = sc.nextInt();
-            }
-            for(int i = 0;i < n;i++){
-                arr[i] = sc.nextInt();
-            }
-            helper_jidian(arr,score);
-        }
+            String str = sc.nextLine();
+            String[] s = str.split("\\.");
+            int len = s[0].length();
+            String s1 = "";
+            String s2 = s[0];
+            if(s[0].charAt(0) != '0'){//判断整数位
+                while(len >0){
+                    if(len < 5){
+                        s1 += main1(s2);
+                        s1+="元";
+                        len = 0;
+                    }else if(len <= 8){
+                        s1 += main1(s2.substring(0,len-4));
+                        s2 = s2.substring(len-4);
+                        s1+= "万";
+                        len = s2.length();
+                    }else{
+                        s1 += main1(s2.substring(0,len-8));
+                        s2 = s2.substring(len-8);
+                        s1 +="亿";
+                        len = s2.length();
+                    }
 
+                }
+            }
+            if(s[1].charAt(0) == s[1].charAt(1) && s[1].charAt(0) == '0'){
+                System.out.println("人民币"+s1+"整");
+                return;
+            }
+            for(int i =0;i<2;i++){//判断小数位
+                String[] ss = {"分","角"};
+                switch(s[1].charAt(i)){
+                    case '0':break;
+                    case '1':
+                        s1 = s1+ "壹"+ss[2-i-1];break;
+                    case '2': s1 = s1 + "贰"+ss[2-i-1];break;
+                    case '3': s1+=("叁"+ss[2-i-1]);break;
+                    case '4': s1+=("肆"+ss[2-i-1]);break;
+                    case '5': s1+=("伍"+ss[2-i-1]);break;
+                    case '6': s1+=("陆"+ss[2-i-1]);break;
+                    case '7': s1+=("柒"+ss[2-i-1]);break;
+                    case '8': s1+=("捌"+ss[2-i-1]);break;
+                    case '9': s1+=("玖"+ss[2-i-1]);break;
+
+                }
+            }
+            System.out.println("人民币"+s1);
+        }
     }
-
-    private static void helper_jidian(int[] arr,int[] score) {
-        double[] result = new double[arr.length];
-        for(int i = 0;i < arr.length;i++){
-            if(arr[i] >= 90 && arr[i] <= 100){
-                result[i] = 4.0 * score[i];
-            }else if(arr[i] >= 85 && arr[i] <= 89){
-                result[i] = 3.7 * score[i];
-            }else if(arr[i] >= 82 && arr[i] <= 84){
-                result[i] = 3.3 * score[i];
-            }else if(arr[i] >= 78 && arr[i] <= 81){
-                result[i] = 3.0 * score[i];
-            }else if(arr[i] >= 75 && arr[i] <= 77){
-                result[i] = 2.7 * score[i];
-            }else if(arr[i] >= 72 && arr[i] <= 74){
-                result[i] = 2.3 * score[i];
-            }else if(arr[i] >= 68 && arr[i] <= 71){
-                result[i] = 2.0 * score[i];
-            }else if(arr[i] >= 64 && arr[i] <= 67){
-                result[i] = 1.5 * score[i];
-            }else if(arr[i] >= 60 && arr[i] <= 63){
-                result[i] = 1.0 * score[i];
-            }else if(arr[i] < 60){
-                result[i] = 0;
+    public static String main1(String s){
+        int len = s.length();
+        int len1 = len;
+        String s1 = "";
+        String[] ss = {"","拾","佰","仟"};
+        for(int i = 0;i<len;i++){
+            while(i!= len-1 && s.charAt(i) == '0'&&s.charAt(i+1) == '0'){
+                i++;
             }
+            switch(s.charAt(i)){
+                case '0': s1+="零";break;
+                case '1': if(len1 == 2){
+                    s1 += ss[len -i-1];
+                }else{
+                    s1 = s1+ "壹"+ss[len-i-1];
+                }break;
+                case '2': s1 = s1 + "贰"+ss[len-i-1];break;
+                case '3': s1+=("叁"+ss[len-i-1]);break;
+                case '4': s1+=("肆"+ss[len-i-1]);break;
+                case '5': s1+=("伍"+ss[len-i-1]);break;
+                case '6': s1+=("陆"+ss[len-i-1]);break;
+                case '7': s1+=("柒"+ss[len-i-1]);break;
+                case '8': s1+=("捌"+ss[len-i-1]);break;
+                case '9': s1+=("玖"+ss[len-i-1]);break;
+
+            }
+            len1 --;
         }
-        double count_jidian = 0;
-        int count_score = 0;
-        for(int i = 0;i < result.length;i++){
-            count_jidian += result[i];
-            count_score += score[i];
-        }
-        double GPA = count_jidian / count_score;
-        System.out.printf("%.2f",GPA);
-        System.out.println();
+        return s1;
     }
 }
+
