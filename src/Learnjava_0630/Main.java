@@ -3,23 +3,27 @@ package Learnjava_0630;
 import java.util.Scanner;
 
 public class Main {
-    //数字之和
+    //找x
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while(sc.hasNext()){
             int n = sc.nextInt();
-            int N = n * n;
-            int sum1 = 0;
-            int sum2 = 0;
-            while(n != 0){
-                sum1 += n % 10;
-                n /= 10;
+            int[] arr = new int[n];
+            for(int i = 0;i < n;i++){
+                arr[i] = sc.nextInt();
             }
-            while(N != 0){
-                sum2 += N % 10;
-                N /= 10;
+            int toFind = sc.nextInt();
+            int i = 0;
+            int count = -1;
+            while(i < n) {
+                if (arr[i] == toFind) {
+                    count = i;
+                    break;
+                }else{
+                    count = -1;
+                }
             }
-            System.out.println(sum1 + " " + sum2);
+                System.out.println(count);
         }
     }
 }
