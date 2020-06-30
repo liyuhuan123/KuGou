@@ -12,18 +12,16 @@ public class Main {
             for(int i = 0;i < n;i++){
                 arr[i] = sc.nextInt();
             }
-            int toFind = sc.nextInt();
-            int i = 0;
-            int count = -1;
-            while(i < n) {
-                if (arr[i] == toFind) {
-                    count = i;
-                    break;
-                }else{
-                    count = -1;
-                }
-            }
-                System.out.println(count);
+            int m = sc.nextInt();
+            System.out.println(Look(arr,n,m));
         }
+    }
+    private static int Look(int[] arr,int n,int m){
+        for(int i = 0;i < n;i++){
+            if(arr[i] == m){
+                return i;
+            }
+        }
+        return -1;
     }
 }
