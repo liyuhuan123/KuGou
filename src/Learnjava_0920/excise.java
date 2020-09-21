@@ -34,7 +34,7 @@ public class excise {
                 }
             }
         }
-        res[prices.length] = prices[prices.length - 1];
+        res[prices.length - 1] = prices[prices.length - 1];
         return res;
     }
 }
