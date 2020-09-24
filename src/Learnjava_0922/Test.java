@@ -23,7 +23,7 @@ public class Test {
                 if(list.contains(nums1[i])){
                     i++;
                     j++;
-                    
+
                 }else{
                     list.add(nums1[i]);
                 }
